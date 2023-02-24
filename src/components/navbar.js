@@ -5,23 +5,6 @@ import {setLogin, setLogout} from "../state";
 
 
 export const Navbar = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const isAuth = Boolean(useSelector((state) => state.token));
-    const user = useSelector((state) => state.user);
-
-    const signOut = () => {
-        dispatch(
-            setLogout({
-                user: null,
-                token: null,
-            })
-        );
-
-        navigate('/');
-    }
-
     return (
         <Pane display="flex" padding={16} borderRadius={3} alignItems="center">
             <Pane flex={1} alignItems="center" display="flex">
