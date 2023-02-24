@@ -5,6 +5,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
+import { Button } from 'evergreen-ui';
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -13,6 +14,7 @@ export default function CheckoutForm() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentComplete, setPaymentComplete] = useState(false);
 
   useEffect(() => {
     if (!stripe) {
@@ -83,19 +85,29 @@ export default function CheckoutForm() {
   }
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement
-        id="link-authentication-element"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <>
+        {paymentComplete ?
+            <>
+              <h1>Payment Complete</h1>
+            </>:
+            <>
+              <form id="payment-form" onSubmit={handleSubmit}>
+                <LinkAuthenticationElement
+                    id="link-authentication-element"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <PaymentElement id="payment-element" options={paymentElementOptions} />
+                <Button marginTop={20} disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+                </Button>
+                {}
+                {/* Show any error or success messages */}
+                {message && <div id="payment-message">{message}</div>}
+              </form>
+            </>
+        }
+      </>
   );
 }

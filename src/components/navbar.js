@@ -15,6 +15,14 @@ export const Navbar = () => {
         navigate('/');
     }
 
+    const handleDashboard = () => {
+        if (isAuth.role === 'Donor'){
+            navigate('/dashboard/donater')
+        }else{
+            navigate('/dashboard/fundraiser')
+        }
+    }
+
     return (
         <Pane display="flex" padding={16} borderRadius={3} alignItems="center">
             <Pane flex={1} alignItems="center" display="flex">
@@ -28,6 +36,16 @@ export const Navbar = () => {
                     {isAuth ?
                         <>
                             <Pane display="flex" alignItems="center">
+                                <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44}
+                                        borderRadius={8}
+                                        alignSelf={"center"} appearance={"minimal"} color={"black"} onClick={()=>{navigate('/donation')}}>
+                                    Track your donation
+                                </Button>
+                                <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44}
+                                        borderRadius={8}
+                                        alignSelf={"center"} appearance={"minimal"} color={"black"} onClick={handleDashboard}>
+                                    Dashboard
+                                </Button>
                                 <Button onClick={signOut} marginRight={12} height={44} borderRadius={8} backgroundColor={"#1300c1"}
                                         color={"white"}>
                                     Sign out
@@ -37,6 +55,11 @@ export const Navbar = () => {
                         </>
                         :
                         <Pane display="flex" alignItems="center">
+                            <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44}
+                                    borderRadius={8}
+                                    alignSelf={"center"} appearance={"minimal"} color={"black"} onClick={()=>{navigate('/donation')}}>
+                                Track your donation
+                            </Button>
                             <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44}
                                     borderRadius={8}
                                     alignSelf={"center"} appearance={"minimal"} color={"black"} onClick={() => {
