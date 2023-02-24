@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Navbar } from '../../components/navbar';
 import { Card, Pane, Text, Image, TextInputField, Button, Heading, Group } from 'evergreen-ui';
-
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
 const HomePage = () => {
     const [donationAmount, setDonationAmount] = useState('');
     const [otherDonationAmount, setOtherDonationAmount] = useState('');
@@ -32,13 +33,77 @@ const HomePage = () => {
         setDonationSubmitted(true);
     };
 
+    // make a list of strings for the image sources
+    const data = [
+        { image: require('../../assets/images/camp6.png'), title: "Mums Matter", description: "Help us offer a supportive space for new mothers", amountTarget: 25000, amountReceived: 6000 },
+        { image: require('../../assets/images/camp2.png'), title: "Ysgol Bae Baglan Fun Day", description: "Help us offer free emotional and mental health support for Children and Young People", amountTarget: 5000, amountReceived: 2500 },
+        { image: require('../../assets/images/camp3.png'), title: "In It Together", description: "Help us fund a festival focused on wellness and meditation", amountTarget: 2600, amountReceived: 2000 },
+        { image: require('../../assets/images/camp4.png'), title: "Retreat", description: "Help us fund events based on wellness and meditation", amountTarget: 24000, amountReceived: 15000 },
+        { image: require('../../assets/images/camp5.png'), title: "Young Minds Project", description: "Help us offer a range of free emotional and mental health support for young adults", amountTarget: 18000, amountReceived: 15000 },
+        { image: require('../../assets/images/camp.png'), title: "ASICS Couch to 5k", description: "Help us fun runners for better mental health", amountTarget: 2566, amountReceived: 500 },
+        { image: require('../../assets/images/camp6.png'), title: "Mums Matter", description: "Help us offer a supportive space for new mothers", amountTarget: 25000, amountReceived: 6000 },
+        { image: require('../../assets/images/camp2.png'), title: "Ysgol Bae Baglan Fun Day", description: "Help us offer free emotional and mental health support for Children and Young People", amountTarget: 5000, amountReceived: 2500 }
+    ]
+
+    // map the data to the component
+    const cards = data.map((item, index) => {
+        return (
+            <Card
+
+                height={550}
+                width={"100%"}
+                margin={15}
+                backgroundColor={"#8149FF"}
+                elevation={3}
+                padding={0}
+                borderRadius={20}
+            >
+                <Image
+
+                    src={item.image}
+                    style={{
+                        width: "100%",
+                        borderRadius: "10px",
+                        height: "undefined",
+                        aspectRatio: 1.5, // add this line
+                        objectFit: "cover", // add this line
+                        objectPosition: "center", // add this line
+                    }}
+                    alt="Your image"
+                />
+                <br />
+                <br />
+                <Pane padding={30}>
+                    <Text fontSize={30} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={"600"}>
+                        {item.title}
+                        <br />
+                        <br />
+                    </Text>
+                    <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={"300"}>
+                        {item.description}
+                        <br />
+                        <br />
+                    </Text>
+                    <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={"300"}>
+                        {item.amountReceived} / {item.amountTarget}
+                        <br />
+                        <br />
+                    </Text>
+                    <Button appearance="primary" marginTop={10} width={"100%"}>
+                        Donate Now
+                    </Button>
+                </Pane>
+            </Card>
+        )
+    })
+
     const Bard = () => {
-        return(
-            <Card height={500} width={"100%"} margin = {15} backgroundColor={"#8149FF"} elevation={3} borderRadius={20}>
+        return (
+            <Card height={500} width={"100%"} margin={15} backgroundColor={"#8149FF"} elevation={3} borderRadius={20}>
                 <Image
                     src={require('../../assets/images/camp.png')}
                     style={{
-                        width:"100%",
+                        width: "100%",
                         borderRadius: "10px",
                         height: "undefined",
                         aspectRatio: 1.5, // add this line
@@ -155,34 +220,58 @@ const HomePage = () => {
 
             </Pane>
             {/* Second bottomhalf */}
-            <Pane display="flex" flexDirection="row">
+            <Pane display="flex" flexDirection="row" marginX={50}>
                 <Pane backgroundColor={"#FFFFFF"} height={1200} width={"100%"} display="flex" alignItems="center" flexWrap="wrap" justifyContent="center" >
                     <Heading size={900} marginTop={22} marginLeft={22}>Active Campaigns</Heading>
                     <Pane
-                        display="flex"
-                        flexDirection="row"
-                        padding={10}
+                    display="flex"
+                    flexDirection="row"
+                    padding={5}
+                    flexWrap="wrap"
+                    justifyContent="center"
+                    alignItems="center"
+                    width={"100%"}
                     >
-                        <Bard />
-                        <Bard />
-                        <Bard />
-                        <Bard />
+                    {data.map((campaign) => (
+                        <Card
+                        height={550}
+                        width={"20%"}
+                        margin={10}
+                        backgroundColor={"#8149FF"}
+                        elevation={3}
+                        padding={0}
+                        borderRadius={20}
+                        alignSelf="center"
+                        >
+                        <Image
+                            src={campaign.image}
+                            style={{
+                            width: "100%",
+                            borderRadius: "10px",
+                            height: "undefined",
+                            aspectRatio: 1.5, // add this line
+                            objectFit: "cover", // add this line
+                            objectPosition: "center", // add this line
+                            }}
+                            alt="Your image"
+                        />
+                        <Text padding={10} fontSize={25} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'} textAlign="center">
+                        {campaign.title}<br /><br />
+                        </Text>
 
-                    </Pane>
-                    <Pane
-                        display="flex"
-                        flexDirection="row"
-                        padding={10}
-                    >
-                        <Bard />
-                        <Bard />
-                        <Bard />
-                        <Bard />
+                        <Text padding={10} fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'300'}>
+                            {campaign.description}<br /><br />
+                        </Text>
+                        <Progress percent={(campaign.amountReceived / campaign.amountTarget) * 100} status="success" />
+                        </Card>
 
+                        
+                    ))}
                     </Pane>
-                <br></br>
+                    <br />
                 </Pane>
             </Pane>
+
             {/* Third bottomhalf  FAQs*/}
             <Pane display="flex" backgroundColor={"#71F5C4"} flexDirection="column" padding={16}>
 
