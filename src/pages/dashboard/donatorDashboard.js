@@ -102,6 +102,7 @@ const ReturnBox = ({title, description, progress, strokeColor}) => {
 const DonatorDashboard = () => {
     return(
         <>
+            <Navbar />
             <Heading size={900} marginTop={24} marginLeft={24}>Donator Dashboard</Heading>
 
             <Heading size={900} marginTop={22} marginLeft={22}>Available Donations</Heading>
