@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HomePage from "./pages/home/homepage";
-import SignIn from "./pages/signin";
-import SignUp from "./pages/signup";
+import SignIn from "./pages/authentication/signin";
+import SignUp from "./pages/authentication/signup";
 import DonatorDashboard from "./pages/dashboard/donatorDashboard";
 import FundraiserDashboard from "./pages/dashboard/fundraiserDashboard";
 

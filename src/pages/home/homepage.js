@@ -44,7 +44,7 @@ const HomePage = () => {
                     </Heading>
                 </Pane>
                 <Pane backgroundColor={"#1300c1"} height={650} width={'40%'} display="flex" alignItems="center" justifyContent="center">
-                    <Card height={550} width={'70%'} backgroundColor={'#8149FF'} elevation={3} padding={30} borderRadius={20}>
+                    <Card height={550} width={'70%'} backgroundColor={'#8149FF'} elevation={10} padding={30} borderRadius={20}>
                         <Text fontSize={30} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>
                             Donate Now<br/><br/>
                         </Text>
@@ -111,7 +111,7 @@ const HomePage = () => {
 
             </Pane>
             <Pane display="flex" flexDirection="row">
-                <Pane backgroundColor={"#71F5C4"} height={650} width={'100%'} display="flex" alignItems="center" justifyContent="center">
+                <Pane backgroundColor={"#FFFFFF"} height={650} width={'100%'} display="flex" alignItems="center" justifyContent="center">
                     <Card height={550} width={'30%'} backgroundColor={'#8149FF'} elevation={3} padding={30} borderRadius={20}>
                         <Text fontSize={30} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>
                             Donate Now<br/><br/>
