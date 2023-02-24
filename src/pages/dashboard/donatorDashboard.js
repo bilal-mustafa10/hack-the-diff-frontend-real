@@ -2,12 +2,12 @@
 // This will show all the donations available for the donator to choose from
 // This will also show the donations that the donator has already made
 
-import {Pane, Text, Image, Heading} from 'evergreen-ui';
+import {Pane, Text, Image, Heading, Button, Card} from 'evergreen-ui';
 import { Line } from 'rc-progress';
 import { useMemo, useState } from 'react';
 import { Navbar } from '../../components/navbar';
 
-    
+
 const ReturnBox = ({title, description, progress, strokeColor}) => {
     const [donationAmount, setDonationAmount] = useState('');
     const [otherDonationAmount, setOtherDonationAmount] = useState('');
@@ -51,17 +51,17 @@ const ReturnBox = ({title, description, progress, strokeColor}) => {
                         padding={0}
                         borderRadius={20}
                     >
-                        <Image 
-                            src={require('../../assets/images/camp.png')} 
-                            style={{ 
-                                width:"100%", 
+                        <Image
+                            src={require('../../assets/images/camp.png')}
+                            style={{
+                                width:"100%",
                                 borderRadius: "10px",
                                 height: "undefined",
                                 aspectRatio: 1.5, // add this line
                                 objectFit: "cover", // add this line
                                 objectPosition: "center", // add this line
-                            }} 
-                            alt="Your image" 
+                            }}
+                            alt="Your image"
                         />
                         <br />
                         <br />
@@ -109,7 +109,7 @@ const DonatorDashboard = () => {
                 display="flex"
                 flexDirection="row"
                 padding={10}
-                
+
             >
                 <ReturnBox  title="Donation 1"  description="Campaign by Clara"  progress={80}/>
                 <ReturnBox title="Donation 2" description="Campaign by John" progress={60}/>
@@ -128,7 +128,7 @@ const DonatorDashboard = () => {
                 display="flex"
                 flexDirection="row"
                 padding={10}
-                
+
             >
                 <ReturnBox  title="Donation 1"  description="Campaign by Clara"  progress={80}/>
                 <ReturnBox title="Donation 2" description="Campaign by John" progress={60}/>

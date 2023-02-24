@@ -51,17 +51,17 @@ const ReturnBox = ({title, description, progress, strokeColor}) => {
                         padding={0}
                         borderRadius={20}
                     >
-                        <Image 
-                            src={require('../../assets/images/camp.png')} 
-                            style={{ 
-                                width:"100%", 
+                        <Image
+                            src={require('../../assets/images/camp.png')}
+                            style={{
+                                width:"100%",
                                 borderRadius: "10px",
                                 height: "undefined",
                                 aspectRatio: 1.5, // add this line
                                 objectFit: "cover", // add this line
                                 objectPosition: "center", // add this line
-                            }} 
-                            alt="Your image" 
+                            }}
+                            alt="Your image"
                         />
                         <br />
                         <br />
@@ -91,10 +91,10 @@ const ReturnBox = ({title, description, progress, strokeColor}) => {
                     </Card>
                 </Pane>
             </Pane>
-  
+
         </>
 
-        
+
     )
 }
 
@@ -103,14 +103,15 @@ const ReturnBox = ({title, description, progress, strokeColor}) => {
 const FundraiserDashboard = () => {
     return(
         <>
+            <Navbar/>
             <Heading size={900} marginTop={24} marginLeft={24}>Fundraiser Dashboard</Heading>
-            
+
             <Heading size={900} marginTop={22} marginLeft={22}>Active Campaigns</Heading>
             <Pane
                 display="flex"
                 flexDirection="row"
                 padding={10}
-                
+
             >
                 <ReturnBox  title="Donation 1"  description="Campaign by Clara"  progress={80}/>
                 <ReturnBox title="Donation 2" description="Campaign by John" progress={60}/>
@@ -119,14 +120,14 @@ const FundraiserDashboard = () => {
                 <ReturnBox  title="Donation 4" description="This is a description of donation 4" progress={40}/>
             </Pane>
         {/* next line should start in a new line */}
-            
-            
+
+
             <Heading size={900} marginTop={22} marginLeft={22}>My Campaigns</Heading>
              <Pane
                 display="flex"
                 flexDirection="row"
                 padding={10}
-                
+
             >
                 <ReturnBox  title="Donation 1"  description="Campaign by Clara"  progress={80}/>
                 <ReturnBox title="Donation 2" description="Campaign by John" progress={60}/>
@@ -136,11 +137,10 @@ const FundraiserDashboard = () => {
             </Pane>
 
 
-         
+
         </>
     )
 }
 
 export default FundraiserDashboard;
 
-    
