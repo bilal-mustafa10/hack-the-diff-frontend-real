@@ -1,13 +1,37 @@
-body {
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+@font-face {
+  font-family: meridian;
+  src: url("assets/fonts/fs_meridian/Trial_Fonts/FSMeridianTrial-Thin.otf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: meridian;
+  src: url("assets/fonts/fs_meridian/Trial_Fonts/FSMeridianTrial-Light.otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: meridian;
+  src: url("assets/fonts/fs_meridian/Trial_Fonts/FSMeridianTrial-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: meridian;
+  src: url("assets/fonts/fs_meridian/Trial_Fonts/FSMeridianTrial-Medium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: meridian;
+  src: url("assets/fonts/fs_meridian/Trial_Fonts/FSMeridianTrial-Bold.otf");
+  font-weight: 600;
 }
