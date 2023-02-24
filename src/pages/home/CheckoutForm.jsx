@@ -5,7 +5,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-import {Button, Checkbox, Text} from 'evergreen-ui';
+import {Button, Checkbox, Heading, Image, Text} from 'evergreen-ui';
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -59,6 +59,8 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
+    setPaymentComplete(true);
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -87,9 +89,31 @@ export default function CheckoutForm() {
 
   return (
       <>
-        {paymentComplete ?
+        {paymentComplete === true ?
             <>
-              <h1>Payment Complete</h1>
+              <Heading size={600} fontWeight={400} fontFamily={"meridian"} marginBottom={30} color={"#FFFFFF"} textAlign={"center"}>
+                Thank you for your generous donation, your kindness makes a difference in the lives of those in need!
+              </Heading>
+              <Image
+                  src={require('../../assets/images/love_heart.png')}
+                  borderRadius={8}
+                  width={300}
+                  height={300}
+                  alignItems={"center"}
+                  style={{ display: "block", margin: "auto" }}
+              />
+              <Button
+                  margin={10}
+                  marginTop={50}
+                  backgroundColor={"#1300c1"} color={"white"}
+                  height={45}
+                  width={"100%"}
+                  borderRadius={5}
+                  justifyContent={"center"}
+                 // onClick={()=>{setTrackClicked(true)}}
+              >
+                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>Share on Social Media</Text>
+              </Button>
             </>:
             <>
               <form id="payment-form" onSubmit={handleSubmit}>

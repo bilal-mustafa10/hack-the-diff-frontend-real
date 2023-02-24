@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import { Navbar } from '../../components/navbar';
 import { loadStripe } from "@stripe/stripe-js";
-import {Card, Pane, Text, Image, TextInputField, Button, Heading, Group, Avatar} from 'evergreen-ui';
+import {Card, Pane, Text, Image, TextInputField, Button, Heading, Group, Avatar, Label, Textarea} from 'evergreen-ui';
 import * as stripe from "stripe";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
@@ -351,6 +351,50 @@ const HomePage = () => {
                     </Text>
                 </Pane>
 
+            </Pane>
+            <Pane display="flex" backgroundColor={"white"} flexDirection="column" padding={16}>
+
+                <Heading size={900} fontWeight={600} fontFamily="meridian" marginY={24}>
+                    Contact Us
+                </Heading>
+
+                <Pane display={"flex"} flexDirection={'row'}>
+                    <TextInputField
+                        label="Email Address"
+                        placeholder="johndoe@mail.com"
+                        fontFamily={"meridian"}
+                        fontSize={18}
+                        inputHeight={50}
+                        width={"50%"}
+                        marginRight={30}
+                    />
+                    <TextInputField
+                        label="Phone Number"
+                        placeholder="XXXXXXXXXXXX"
+                        fontFamily={"meridian"}
+                        fontSize={18}
+                        inputHeight={50}
+                        width={"50%"}
+                    />
+                </Pane>
+
+
+
+                <Pane>
+                    <Label htmlFor="textarea-2" marginBottom={4} display="block">
+                        Message
+                    </Label>
+                    <Textarea id="textarea-2" height={200} placeholder="Message" />
+                </Pane>
+
+                <Button
+                    backgroundColor={"#1300c1"} color={"white"}
+                    height={45}
+                    borderRadius={5}
+                    marginY={30}
+                >
+                    <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>Send Message</Text>
+                </Button>
             </Pane>
 
         </>
