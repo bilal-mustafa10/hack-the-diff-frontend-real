@@ -60,6 +60,7 @@ const HomePage = () => {
     const [donationAmount, setDonationAmount] = useState('');
     const [otherDonationAmount, setOtherDonationAmount] = useState('');
     const [donationSubmitted, setDonationSubmitted] = useState(false);
+    const [isDonationSubmitted, setIsDonationSubmitted] = useState(false);
     const [selectedValue, setSelectedValue] = useState('onetime');
 
     const options = useMemo(
@@ -112,9 +113,9 @@ const HomePage = () => {
                 </Pane>
                 <Pane backgroundColor={"#1300c1"} height={650} width={'40%'} display="flex" alignItems="center" justifyContent="center">
                     <Card height={550} width={'70%'} backgroundColor={'#8149FF'} elevation={3} padding={30} borderRadius={20}>
-                        {donationSubmitted ?
+                        {isDonationSubmitted ?
                         <>
-                            <Text onClick={()=>{setDonationSubmitted(false)}} fontSize={18} fontFamily={"meridian"} color={"ghostwhite"} fontWeight={'450'}>
+                            <Text onClick={()=>{setIsDonationSubmitted(false)}} fontSize={18} fontFamily={"meridian"} color={"ghostwhite"} fontWeight={'450'}>
                                 Back<br /><br />
                             </Text>
                             {clientSecret && (
@@ -130,61 +131,59 @@ const HomePage = () => {
                                 <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'300'}>
                                     This holiday season, your gift will be matched to provide double the lifesaving assistance<br /><br />
                                 </Text>
-                                <form onSubmit={handleDonationSubmit}>
-                                    <Group display="flex" justifyContent="center" marginTop={20}>
-                                        {options.map(({ label, value }) => (
-                                            <Button
-                                                height={50}
-                                                key={label}
-                                                width={200}
-                                                isActive={selectedValue === value}
-                                                onClick={() => setSelectedValue(value)}
-                                                appearance={selectedValue === value ? 'primary' : 'minimal'}
-                                                borderWidth={2}
-                                                borderColor={"#FFFFFF"}
-                                            >
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>
-                                                    {label}
-                                                </Text>
-                                            </Button>
-                                        ))}
-                                    </Group>
-                                    <Pane marginTop={20} display="flex" flexDirection="column" justifyContent="space-between">
-                                        <Pane display="flex" justifyContent="space-between" paddingBottom={10}>
-                                            <Button backgroundColor={donationAmount === '10' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('10')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£10</Text>
-                                            </Button>
-                                            <Button backgroundColor={donationAmount === '20' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('20')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£20</Text>
-                                            </Button>
-                                            <Button backgroundColor={donationAmount === '30' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('30')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£30</Text>
-                                            </Button>
-                                        </Pane>
-                                        <Pane display="flex" justifyContent="space-between" paddingTop={10}>
-                                            <Button backgroundColor={donationAmount === '50' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('50')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£50</Text>
-                                            </Button>
-                                            <Button backgroundColor={donationAmount === '75' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('75')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£75</Text>
-                                            </Button>
-                                            <Button backgroundColor={donationAmount === '100' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('100')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£100</Text>
-                                            </Button>
-                                        </Pane>
+                                <Group display="flex" justifyContent="center" marginTop={20}>
+                                    {options.map(({ label, value }) => (
+                                        <Button
+                                            height={50}
+                                            key={label}
+                                            width={200}
+                                            isActive={selectedValue === value}
+                                            onClick={() => setSelectedValue(value)}
+                                            appearance={selectedValue === value ? 'primary' : 'minimal'}
+                                            borderWidth={2}
+                                            borderColor={"#FFFFFF"}
+                                        >
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>
+                                                {label}
+                                            </Text>
+                                        </Button>
+                                    ))}
+                                </Group>
+                                <Pane marginTop={20} display="flex" flexDirection="column" justifyContent="space-between">
+                                    <Pane display="flex" justifyContent="space-between" paddingBottom={10}>
+                                        <Button backgroundColor={donationAmount === '10' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('10')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£10</Text>
+                                        </Button>
+                                        <Button backgroundColor={donationAmount === '20' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('20')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£20</Text>
+                                        </Button>
+                                        <Button backgroundColor={donationAmount === '30' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('30')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£30</Text>
+                                        </Button>
                                     </Pane>
-                                    <TextInputField
-                                        placeholder="Enter amount"
-                                        inputHeight={45}
-                                        value={otherDonationAmount}
-                                        onChange={(event) => handleOtherDonationAmountChange(event)}
-                                        marginTop={20}
-                                        borderRadius={8}
-                                    />
-                                    <Button appearance="primary" marginTop={10} width={"100%"} height={50} backgroundColor={"#1300c1"} borderRadius={8}>
-                                        Donate Now
-                                    </Button>
-                                </form>
+                                    <Pane display="flex" justifyContent="space-between" paddingTop={10}>
+                                        <Button backgroundColor={donationAmount === '50' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('50')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£50</Text>
+                                        </Button>
+                                        <Button backgroundColor={donationAmount === '75' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('75')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£75</Text>
+                                        </Button>
+                                        <Button backgroundColor={donationAmount === '100' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('100')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                            <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£100</Text>
+                                        </Button>
+                                    </Pane>
+                                </Pane>
+                                <TextInputField
+                                    placeholder="Enter amount"
+                                    inputHeight={45}
+                                    value={otherDonationAmount}
+                                    onChange={(event) => handleOtherDonationAmountChange(event)}
+                                    marginTop={20}
+                                    borderRadius={8}
+                                />
+                                <Button onClick={()=>{setIsDonationSubmitted(true)}} appearance="primary" marginTop={10} width={"100%"} height={50} backgroundColor={"#1300c1"} borderRadius={8}>
+                                    Donate Now
+                                </Button>
                             </>
                         }
 
