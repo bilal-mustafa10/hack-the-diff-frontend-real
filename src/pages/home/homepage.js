@@ -1,8 +1,47 @@
-import { useMemo, useState } from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import { Navbar } from '../../components/navbar';
+import { loadStripe } from "@stripe/stripe-js";
 import { Card, Pane, Text, Image, TextInputField, Button, Heading, Group } from 'evergreen-ui';
+import * as stripe from "stripe";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
 
 const HomePage = () => {
+    const stripePromise = loadStripe("pk_test_51MefTqINgIjnLCvNEbn85DG63i9TXlIMY5DF7Us7xLhUYy97KHPspxzMygS1ffw9aSiHQr4xsMgnCtBJKdaIHOep00ow5LqldU");
+
+    const [clientSecret, setClientSecret] = useState("");
+
+    useEffect(() => {
+        // Create PaymentIntent as soon as the page loads
+        fetch("http://localhost:3001/create-payment-intent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: [{ id: "xl-tshirt",amount:30 }], amount: 30, currency:"gbp" }),
+        })
+            .then((res) => res.json())
+            .then((data) => setClientSecret(data.clientSecret));
+    }, []);
+
+    const appearance = {
+        theme: 'stripe',
+
+        variables: {
+            colorPrimary: '#0570de',
+            colorBackground: '#ffffff',
+            colorText: '#30313d',
+            colorDanger: '#df1b41',
+            borderRadius: '4px',
+            // See all possible variables below
+        }
+    };
+
+    const stripeOptions = {
+        clientSecret,
+        appearance,
+    };
+
+
     const [donationAmount, setDonationAmount] = useState('');
     const [otherDonationAmount, setOtherDonationAmount] = useState('');
     const [donationSubmitted, setDonationSubmitted] = useState(false);
@@ -30,6 +69,19 @@ const HomePage = () => {
     const handleDonationSubmit = (event) => {
         event.preventDefault();
         setDonationSubmitted(true);
+
+        const paymentElement = stripe.elements.create('payment', {
+            payment_method_types: ['card', 'apple_pay', 'google_pay', 'klarna', 'sepa_debit'],
+            automatic_payment_methods: true,
+            layout: {
+                type: 'tabs',
+                defaultCollapsed: false,
+                radios: true,
+                spacedAccordionItems: false
+            }
+        });
+
+        paymentElement.mount('#payment-element');
     };
 
     const Bard = () => {
@@ -92,64 +144,85 @@ const HomePage = () => {
                         <Text fontSize={30} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>
                             Donate Now<br /><br />
                         </Text>
-                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'300'}>
-                            This holiday season, your gift will be matched to provide double the lifesaving assistance<br /><br />
-                        </Text>
-                        <form onSubmit={handleDonationSubmit}>
-                            <Group display="flex" justifyContent="center" marginTop={20}>
-                                {options.map(({ label, value }) => (
-                                    <Button
-                                        height={50}
-                                        key={label}
-                                        width={200}
-                                        isActive={selectedValue === value}
-                                        onClick={() => setSelectedValue(value)}
-                                        appearance={selectedValue === value ? 'primary' : 'minimal'}
-                                        borderWidth={2}
-                                        borderColor={"#FFFFFF"}
-                                    >
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>
-                                            {label}
-                                        </Text>
+
+                        {donationSubmitted ?
+                            <>
+                                {clientSecret && (
+                                    <>
+                                        <Elements options={stripeOptions} stripe={stripePromise}>
+                                            <CheckoutForm />
+                                        </Elements>
+                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'300'}>
+                                            Thank you for your donation of £{donationAmount || otherDonationAmount} {selectedValue === 'monthly' ? 'per month' : ''}.<br /><br /></Text>
+                                    </>
+
+                                )}
+
+
+                            </>
+                            :
+                            <>
+                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'300'}>
+                                    This holiday season, your gift will be matched to provide double the lifesaving assistance<br /><br />
+                                </Text>
+                                <form onSubmit={handleDonationSubmit}>
+                                    <Group display="flex" justifyContent="center" marginTop={20}>
+                                        {options.map(({ label, value }) => (
+                                            <Button
+                                                height={50}
+                                                key={label}
+                                                width={200}
+                                                isActive={selectedValue === value}
+                                                onClick={() => setSelectedValue(value)}
+                                                appearance={selectedValue === value ? 'primary' : 'minimal'}
+                                                borderWidth={2}
+                                                borderColor={"#FFFFFF"}
+                                            >
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>
+                                                    {label}
+                                                </Text>
+                                            </Button>
+                                        ))}
+                                    </Group>
+                                    <Pane marginTop={20} display="flex" flexDirection="column" justifyContent="space-between">
+                                        <Pane display="flex" justifyContent="space-between" paddingBottom={10}>
+                                            <Button backgroundColor={donationAmount === '10' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('10')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£10</Text>
+                                            </Button>
+                                            <Button backgroundColor={donationAmount === '20' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('20')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£20</Text>
+                                            </Button>
+                                            <Button backgroundColor={donationAmount === '30' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('30')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£30</Text>
+                                            </Button>
+                                        </Pane>
+                                        <Pane display="flex" justifyContent="space-between" paddingTop={10}>
+                                            <Button backgroundColor={donationAmount === '50' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('50')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£50</Text>
+                                            </Button>
+                                            <Button backgroundColor={donationAmount === '75' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('75')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£75</Text>
+                                            </Button>
+                                            <Button backgroundColor={donationAmount === '100' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('100')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
+                                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£100</Text>
+                                            </Button>
+                                        </Pane>
+                                    </Pane>
+                                    <TextInputField
+                                        placeholder="Enter amount"
+                                        inputHeight={45}
+                                        value={otherDonationAmount}
+                                        onChange={(event) => handleOtherDonationAmountChange(event)}
+                                        marginTop={20}
+                                        borderRadius={8}
+                                    />
+                                    <Button appearance="primary" marginTop={10} width={"100%"} height={50} backgroundColor={"#1300c1"} borderRadius={8}>
+                                        Donate Now
                                     </Button>
-                                ))}
-                            </Group>
-                            <Pane marginTop={20} display="flex" flexDirection="column" justifyContent="space-between">
-                                <Pane display="flex" justifyContent="space-between" paddingBottom={10}>
-                                    <Button backgroundColor={donationAmount === '10' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('10')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£10</Text>
-                                    </Button>
-                                    <Button backgroundColor={donationAmount === '20' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('20')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£20</Text>
-                                    </Button>
-                                    <Button backgroundColor={donationAmount === '30' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('30')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£30</Text>
-                                    </Button>
-                                </Pane>
-                                <Pane display="flex" justifyContent="space-between" paddingTop={10}>
-                                    <Button backgroundColor={donationAmount === '50' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('50')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£50</Text>
-                                    </Button>
-                                    <Button backgroundColor={donationAmount === '75' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('75')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£75</Text>
-                                    </Button>
-                                    <Button backgroundColor={donationAmount === '100' ? "#1300c1" : 'transparent'} onClick={() => handleDonationAmountChange('100')} paddingX={40} paddingY={20} border="2px solid #FFFFFF">
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'500'}>£100</Text>
-                                    </Button>
-                                </Pane>
-                            </Pane>
-                            <TextInputField
-                                placeholder="Enter amount"
-                                inputHeight={45}
-                                value={otherDonationAmount}
-                                onChange={(event) => handleOtherDonationAmountChange(event)}
-                                marginTop={20}
-                                borderRadius={8}
-                            />
-                            <Button appearance="primary" marginTop={10} width={"100%"} height={50} backgroundColor={"#1300c1"} borderRadius={8}>
-                                Donate Now
-                            </Button>
-                        </form>
+                                </form>
+                            </>
+                        }
+
                     </Card>
                 </Pane>
 
