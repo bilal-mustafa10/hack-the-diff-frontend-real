@@ -184,47 +184,41 @@ const HomePage = () => {
                 </Pane>
             </Pane>
             {/* Third bottomhalf  FAQs*/}
-            <Pane display="flex" flexDirection="row" >
-                <Pane backgroundColor={"#1300c1"} height={650} width={'100%'} display="flex" paddingTop={1}>
+            <Pane display="flex" backgroundColor={"#71F5C4"} flexDirection="column" padding={16}>
 
-                    <Heading size={900} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
-                            FAQs
-                    </Heading>
+                <Heading size={900} fontWeight={600} fontFamily="meridian" marginBottom={24}>
+                    FAQs
+                </Heading>
 
-                    <Heading size={700} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
+                <Pane backgroundColor="#1300c1" padding={24} marginBottom={24}>
+                    <Heading size={700} fontWeight={600} fontFamily="meridian" color="#FFFFFF" marginBottom={16}>
                         Why choose to support a mental health charity?
                     </Heading>
-                    <Heading size={700} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
-                        There are many reasons why someone might choose to support a mental health charity,
-                        including the fact that mental health affects everyone, there is often stigma and discrimination
-                        surrounding mental health issues, there is an increased need for mental health services,
-                        many people have personal experience with mental health issues, and supporting a charity can make a
-                        tangible difference in the lives of others.
+                    <Text color="#FFFFFF" marginBottom={16}>
+                        There are many reasons why someone might choose to support a mental health charity, including the fact that mental health affects everyone, there is often stigma and discrimination surrounding mental health issues, there is an increased need for mental health services, many people have personal experience with mental health issues, and supporting a charity can make a tangible difference in the lives of others.
+                    </Text>
+                </Pane>
+
+                <Pane backgroundColor="#1300c1" padding={24} marginBottom={24}>
+                    <Heading size={700} fontWeight={600} fontFamily="meridian" color="#FFFFFF" marginBottom={16}>
+                        Why choose to support NPT Mind?
                     </Heading>
+                    <Text color="#FFFFFF" marginBottom={16}>
+                        NPT Mind is a local mental health charity that works for the better mental health of people in Neath Port Talbot by providing a range of services. If you want to fundraise for them, they will support you by providing you with fundraising materials, advice, and guidance. You can contact them by phone or email to get started.
+                    </Text>
+                </Pane>
 
-                    <Heading size={700} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
-                        Why choose to support a mental health charity?
-                    </Heading>
->>>>>>> 06110dc5737cff7e4132c9a3968da70aebbe2231
-
-
-                    <Heading size={700} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
-                        NPT Mind is a local mental health charity that works for the better mental health of people in Neath Port Talbot by providing a range of services6.
-                        If you want to fundraise for them,they will support you by providing you with fundraising materials, advice and guidance7. You can contact them by
-                        phone or email to get started.
-                    </Heading>
-
-
-                    <Heading size={700} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
+                <Pane backgroundColor="#1300c1" padding={24} marginBottom={24}>
+                    <Heading size={700} fontWeight={600} fontFamily="meridian" color="#FFFFFF" marginBottom={16}>
                         Can I choose which projects my money funds?
                     </Heading>
-
-                    <Heading size={700} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
-                        Yes, you can! You can choose to fundraise for a specific project or for the charity as a whole. If you want to fundraise for a specific project,
-                        you can select a specific project on the NPT Mind website and donate however much you want to.
-                    </Heading>
+                    <Text color="#FFFFFF">
+                        Yes, you can! You can choose to fundraise for a specific project or for the charity as a whole. If you want to fundraise for a specific project, you can select a specific project on the NPT Mind website and donate however much you want to.
+                    </Text>
                 </Pane>
+
             </Pane>
+
         </>
     );
 };
