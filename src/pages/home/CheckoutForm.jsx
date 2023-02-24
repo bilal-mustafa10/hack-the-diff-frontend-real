@@ -5,7 +5,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-import { Button } from 'evergreen-ui';
+import {Button, Checkbox, Text} from 'evergreen-ui';
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -15,6 +15,7 @@ export default function CheckoutForm() {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
+  const [checked, setChecked] = React.useState(true)
 
   useEffect(() => {
     if (!stripe) {
@@ -97,6 +98,13 @@ export default function CheckoutForm() {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <PaymentElement id="payment-element" options={paymentElementOptions} />
+                {/*<Text color={"white"}>By ticking this box, I confirm I am a UK taxpayer making a personal donation and underestand if I pay less Income Tax and/or Capital Gains than the amount claimed of Gift Aid claimed on all my donations, it is my responsibility to pay and difference.</Text>
+                */}
+                <Checkbox
+                    label={"I would like to claim Gift Aid on my donation"}
+                    checked={checked}
+                    onChange={e => setChecked(e.target.checked)}
+                />
                 <Button marginTop={20} disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}

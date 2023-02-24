@@ -16,11 +16,12 @@ export const Navbar = () => {
     }
 
     const handleDashboard = () => {
-        if (isAuth.role === 'Donor'){
+        navigate('/dashboard/donater')
+        /*if (isAuth.role === 'Donor'){
             navigate('/dashboard/donater')
         }else{
             navigate('/dashboard/fundraiser')
-        }
+        }*/
     }
 
     return (
@@ -36,6 +37,11 @@ export const Navbar = () => {
                     {isAuth ?
                         <>
                             <Pane display="flex" alignItems="center">
+                                <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44}
+                                        borderRadius={8}
+                                        alignSelf={"center"} appearance={"minimal"} color={"black"} onClick={()=>{navigate('/dashboard/fundraiser')}}>
+                                    Fundraiser
+                                </Button>
                                 <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44}
                                         borderRadius={8}
                                         alignSelf={"center"} appearance={"minimal"} color={"black"} onClick={()=>{navigate('/donation')}}>

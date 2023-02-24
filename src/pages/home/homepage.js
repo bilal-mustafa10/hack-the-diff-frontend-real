@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import { Navbar } from '../../components/navbar';
 import { loadStripe } from "@stripe/stripe-js";
-import { Card, Pane, Text, Image, TextInputField, Button, Heading, Group } from 'evergreen-ui';
+import {Card, Pane, Text, Image, TextInputField, Button, Heading, Group, Avatar} from 'evergreen-ui';
 import * as stripe from "stripe";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
@@ -35,8 +35,9 @@ const HomePage = () => {
             colorBackground: '#ffffff',
             colorText: '#30313d',
             colorDanger: '#df1b41',
+            colorSuccess: '#00b159',
+            colorWarning: '#ffbf00',
             borderRadius: '4px',
-            // See all possible variables below
         }
     };
 
@@ -104,15 +105,15 @@ const HomePage = () => {
         <>
             <Navbar />
             <Pane display="flex" flexDirection="row">
-                <Pane backgroundColor={"#1300c1"} height={650} width={'60%'} display="flex" alignItems={"center"} justifyContent="center" paddingY={100} paddingX={60}>
+                <Pane backgroundColor={"#1300c1"} height={700} width={'60%'} display="flex" alignItems={"center"} justifyContent="center" paddingY={100} paddingX={60}>
                     <Heading size={900} fontWeight={600} fontFamily={"meridian"} color={"#FFFFFF"}>
                         We can break the stigma and support those struggling with mental illness. <br /><br />
                         Your donation provides critical resources and helps us build a brighter future for mental health. <br /><br />
                         Donate today to create a world where mental health is a priority and everyone can lead a fulfilling life.<br />
                     </Heading>
                 </Pane>
-                <Pane backgroundColor={"#1300c1"} height={650} width={'40%'} display="flex" alignItems="center" justifyContent="center">
-                    <Card height={550} width={'70%'} backgroundColor={'#8149FF'} elevation={3} padding={30} borderRadius={20}>
+                <Pane backgroundColor={"#1300c1"} height={700} width={'40%'} display="flex" alignItems="center" justifyContent="center">
+                    <Card height={600} width={'70%'} backgroundColor={'#8149FF'} elevation={3} padding={30} borderRadius={20}>
                         {isDonationSubmitted ?
                         <>
                             <Text onClick={()=>{setIsDonationSubmitted(false)}} fontSize={18} fontFamily={"meridian"} color={"ghostwhite"} fontWeight={'450'}>
@@ -194,7 +195,7 @@ const HomePage = () => {
             {/* Second bottomhalf */}
             <Pane display="flex" flexDirection="row" marginX={5}>
                 <Pane backgroundColor={"#FFFFFF"} height={1100} width={"100%"} display="flex" flexWrap="wrap" justifyContent="center" >
-                    <Heading size={900} marginTop={22} textAlign={"center"}>Active Campaigns</Heading>
+                    <Heading size={900} fontFamily={"meridian"} marginTop={22} textAlign={"center"}>Active Campaigns</Heading>
                     <Pane
                         display="flex"
                         flexDirection="row"
@@ -206,7 +207,7 @@ const HomePage = () => {
                         {data.map((campaign) => (
                             <Card
                                 key={campaign.id}
-                                height={425}
+                                height={465}
                                 width={"calc(25% - 30px)"}
                                 margin={15}
                                 backgroundColor={"#8149FF"}
@@ -300,6 +301,12 @@ const HomePage = () => {
                                         borderRadius={20}
                                         style={{ position: "absolute", left: 0, bottom: 0 }}
                                     />
+                                </Pane>
+                                <Pane marginTop={30} padding={10}>
+                                    <Avatar name="Steve Jobs" size={30} marginRight={5} />
+                                    <Avatar name="Bill Gates" size={30} marginRight={5} />
+                                    <Avatar name="Elon Musk" size={30} marginRight={5} />
+                                    <Avatar name="Allen Kleiner" color="green" size={30}/>
                                 </Pane>
                             </Card>
 
