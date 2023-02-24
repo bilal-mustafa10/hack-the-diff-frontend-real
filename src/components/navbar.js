@@ -8,6 +8,9 @@ export const Navbar = () => {
             </Pane>
             <Pane display="flex" alignItems="center">
                 <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44} borderRadius={8} alignSelf={"center"} appearance={"minimal"} color={"black"}>
+                    Track your donation
+                </Button>
+                <Button borderColor={"#1300c1"} borderWidth={2} marginRight={16} height={44} borderRadius={8} alignSelf={"center"} appearance={"minimal"} color={"black"}>
                     Log in
                 </Button>
                 <Button marginRight={12} height={44} borderRadius={8} backgroundColor={"#1300c1"} color={"white"}>
