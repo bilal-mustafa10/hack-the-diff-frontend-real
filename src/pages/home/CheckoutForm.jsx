@@ -92,7 +92,7 @@ export default function CheckoutForm() {
         {paymentComplete === true ?
             <>
               <Heading size={600} fontWeight={400} fontFamily={"meridian"} marginBottom={30} color={"#FFFFFF"} textAlign={"center"}>
-                Thank you for your generous donation, your kindness makes a difference in the lives of those in need!
+                Thank you for your generous donation, your kindness makes a difference in the lives of those in need!<br/> Your Tracking ID is: 974296745352
               </Heading>
               <Image
                   src={require('../../assets/images/love_heart.png')}

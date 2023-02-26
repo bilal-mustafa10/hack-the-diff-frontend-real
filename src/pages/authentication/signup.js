@@ -44,117 +44,115 @@ const SignUp = () => {
                             </Text>
                         </Pane>
 
-                        <form onSubmit={()=>{}}>
-                            <Group display="flex" justifyContent="flex-start" marginTop={20}>
-                                {options.map(({ label, value }) => (
-                                    <Button
-                                        height={50}
-                                        key={label}
-                                        width={200}
-                                        isActive={role === value}
-                                        onClick={() => setRole(value)}
-                                        appearance={role === value ? 'primary' : 'minimal'}
-                                        borderWidth={2}
-                                        borderColor={"#FFFFFF"}
-                                    >
-                                        <Text fontSize={18} fontFamily={"meridian"} color={role === value ? "#FFFFFF" : 'black'} fontWeight={'500'}>
-                                            {label}
-                                        </Text>
-                                    </Button>
-                                ))}
-                            </Group>
-                            <Pane display={"flex"} flexDirection={'row'}>
-                                <TextInputField
-                                    onChange={e => setFirstName({value: e.target.value, error: ''})}
-                                    value={firstName.value}
-                                    marginTop={40}
-                                    label="First Name"
-                                    placeholder="John"
-                                    fontFamily={"meridian"}
-                                    fontSize={18}
-                                    inputHeight={50}
-                                    width={"50%"}
-                                    marginRight={30}
-                                />
-
-                                <TextInputField
-                                    onChange={e => setLastName({value: e.target.value, error: ''})}
-                                    value={lastName.value}
-                                    marginTop={40}
-                                    label="Last Name"
-                                    placeholder="Doe"
-                                    fontFamily={"meridian"}
-                                    fontSize={18}
-                                    inputHeight={50}
-                                    width={"50%"}
-                                />
-                            </Pane>
-
-                            <Pane display={"flex"} flexDirection={'row'}>
-                                <TextInputField
-                                    onChange={e => setPhoneNumber({value: e.target.value, error: ''})}
-                                    value={phoneNumber.value}
-                                    label="Phone Number"
-                                    placeholder="XXXX-XXXX-XXXXX"
-                                    fontFamily={"meridian"}
-                                    fontSize={18}
-                                    inputHeight={50}
-                                    width={"50%"}
-                                    marginRight={30}
-                                />
-
-
-                                <TextInputField
-                                    onChange={e => setEmail({value: e.target.value, error: ''})}
-                                    value={email.value}
-                                    label="Email Address"
-                                    placeholder="johndoe@mail.com"
-                                    fontFamily={"meridian"}
-                                    fontSize={18}
-                                    inputHeight={50}
-                                    width={"50%"}
-                                />
-                            </Pane>
-
-
-
+                        <Group display="flex" justifyContent="flex-start" marginTop={20}>
+                            {options.map(({ label, value }) => (
+                                <Button
+                                    height={50}
+                                    key={label}
+                                    width={200}
+                                    isActive={role === value}
+                                    onClick={() => setRole(value)}
+                                    appearance={role === value ? 'primary' : 'minimal'}
+                                    borderWidth={2}
+                                    borderColor={"#FFFFFF"}
+                                >
+                                    <Text fontSize={18} fontFamily={"meridian"} color={role === value ? "#FFFFFF" : 'black'} fontWeight={'500'}>
+                                        {label}
+                                    </Text>
+                                </Button>
+                            ))}
+                        </Group>
+                        <Pane display={"flex"} flexDirection={'row'}>
                             <TextInputField
-                                onChange={e => setPassword({value: e.target.value, error: ''})}
-                                value={password.value}
-                                label="Password"
-                                placeholder="Password"
-                                type="password"
+                                onChange={e => setFirstName({value: e.target.value, error: ''})}
+                                value={firstName.value}
+                                marginTop={40}
+                                label="First Name"
+                                placeholder="John"
                                 fontFamily={"meridian"}
                                 fontSize={18}
                                 inputHeight={50}
-
+                                width={"50%"}
+                                marginRight={30}
                             />
 
-                            <Pane display="flex" margin={0} marginBottom={20} borderRadius={3}>
-                                <Pane flex={1} alignItems="center" display="flex">
-                                    <Button
-                                        color={"black"}
-                                        height={45}
-                                        width={"50%"}
-                                        borderRadius={5}
-                                        justifyContent={"center"}
-                                        onClick={() => { navigate('/signin')}}
+                            <TextInputField
+                                onChange={e => setLastName({value: e.target.value, error: ''})}
+                                value={lastName.value}
+                                marginTop={40}
+                                label="Last Name"
+                                placeholder="Doe"
+                                fontFamily={"meridian"}
+                                fontSize={18}
+                                inputHeight={50}
+                                width={"50%"}
+                            />
+                        </Pane>
 
-                                    >
-                                        <Text fontSize={18} fontFamily={"meridian"} color={"black"} fontWeight={'600'}>Sign
-                                            In</Text>
-                                    </Button>
-                                </Pane>
+                        <Pane display={"flex"} flexDirection={'row'}>
+                            <TextInputField
+                                onChange={e => setPhoneNumber({value: e.target.value, error: ''})}
+                                value={phoneNumber.value}
+                                label="Phone Number"
+                                placeholder="XXXX-XXXX-XXXXX"
+                                fontFamily={"meridian"}
+                                fontSize={18}
+                                inputHeight={50}
+                                width={"50%"}
+                                marginRight={30}
+                            />
+
+
+                            <TextInputField
+                                onChange={e => setEmail({value: e.target.value, error: ''})}
+                                value={email.value}
+                                label="Email Address"
+                                placeholder="johndoe@mail.com"
+                                fontFamily={"meridian"}
+                                fontSize={18}
+                                inputHeight={50}
+                                width={"50%"}
+                            />
+                        </Pane>
+
+
+
+                        <TextInputField
+                            onChange={e => setPassword({value: e.target.value, error: ''})}
+                            value={password.value}
+                            label="Password"
+                            placeholder="Password"
+                            type="password"
+                            fontFamily={"meridian"}
+                            fontSize={18}
+                            inputHeight={50}
+
+                        />
+
+                        <Pane display="flex" margin={0} marginBottom={20} borderRadius={3}>
+                            <Pane flex={1} alignItems="center" display="flex">
                                 <Button
-                                    backgroundColor={"#1300c1"} color={"white"}
+                                    color={"black"}
                                     height={45}
+                                    width={"50%"}
                                     borderRadius={5}
+                                    justifyContent={"center"}
                                     onClick={() => { navigate('/signin')}}
+
                                 >
-                                    <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>Sign Up</Text>
+                                    <Text fontSize={18} fontFamily={"meridian"} color={"black"} fontWeight={'600'}>Sign
+                                        In</Text>
                                 </Button>
                             </Pane>
-                        </form>
+                            <Button
+                                backgroundColor={"#1300c1"} color={"white"}
+                                height={45}
+                                borderRadius={5}
+                                onClick={() => { navigate('/signin')}}
+                            >
+                                <Text fontSize={18} fontFamily={"meridian"} color={"#FFFFFF"} fontWeight={'600'}>Sign Up</Text>
+                            </Button>
+                        </Pane>
                     </Card>
                 </Pane>
 
